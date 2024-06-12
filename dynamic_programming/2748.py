@@ -1,20 +1,15 @@
 import sys
 
-cache = dict()
+cache = {
+    0: 0,
+    1: 1,
+}
 def fibonacci(n):
-    if n == 0 or n == 1:
-        return n
-
     v = cache.get(n)
-    if v:
-        return v
+    if v is None:
+        cache[n] = fibonacci(n - 1) + fibonacci(n - 2)
 
-    a = fibonacci(n - 1)
-    cache[n - 1] = a
-    b = fibonacci(n - 2)
-    cache[n - 2] = b
-
-    return a + b
+    return cache.get(n)
 
 
 n = int(sys.stdin.readline())
